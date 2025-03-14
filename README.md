@@ -73,7 +73,7 @@ pnpm preview
 1. Edit the homepage to change the default "WorldKit" name
 2. Update styling in the Tailwind configuration
 3. Modify the authentication flow in the `/auth` routes
-4. Extend the database functionality in the `/private` section
+4. Extend the database functionality in the `/dashboard` section
 
 ## Deployment
 

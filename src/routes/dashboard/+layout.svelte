@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	let { data, children } = $props();
 	let { supabase } = $derived(data);
 
@@ -7,6 +9,7 @@
 		if (error) {
 			console.error(error);
 		}
+		goto('/auth');
 	};
 </script>
 
