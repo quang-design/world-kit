@@ -1,5 +1,3 @@
-script
-
 <form method="POST" action="?/login">
 	<label>
 		Email
