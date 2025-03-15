@@ -2,7 +2,7 @@
 	let { children } = $props();
 </script>
 
-<header>
+<header class="w-full">
 	<nav>
 		<a href="/">Home</a>
 	</nav>
