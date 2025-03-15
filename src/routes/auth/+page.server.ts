@@ -44,11 +44,7 @@ export const actions: Actions = {
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: {
-				redirectTo: `${PUBLIC_FRONTEND_URL}/auth/callback`,
-				queryParams: {
-					access_type: 'offline',
-					prompt: 'consent'
-				}
+				redirectTo: `${PUBLIC_FRONTEND_URL}/auth/callback`
 			}
 		});
 
