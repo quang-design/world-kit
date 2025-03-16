@@ -1,6 +1,10 @@
-// import type { PageServerLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-// export const load: PageServerLoad = async ({ locals: { supabase } }) => {
-// 	const { data: colors } = await supabase.from('colors').select('name').limit(5).order('name');
-// 	return { colors: colors ?? [] };
-// };
+export const load: PageServerLoad = async ({ locals }) => {
+	if (locals.user) {
+		throw redirect(303, '/dashboard');
+	}
+
+	return {};
+};

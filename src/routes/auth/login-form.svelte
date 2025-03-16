@@ -41,9 +41,9 @@
 
 	<div class="mt-4 flex w-full flex-col gap-4 sm:flex-row">
 		<Form.Button onclick={() => (isSignup = false)} class="w-full">Login</Form.Button>
-		<Form.Button variant="outline" onclick={() => (isSignup = true)} class="w-full"
-			>Signup</Form.Button
-		>
+		<Form.Button variant="outline" onclick={() => (isSignup = true)} class="w-full">
+			Signup
+		</Form.Button>
 	</div>
 </form>
 

@@ -20,7 +20,7 @@
 </script>
 
 <main class="min-h-dvh overflow-hidden">
-	<div class="grid min-h-dvh grid-cols-[1rem_1fr_1rem] grid-rows-[1rem_1fr_1rem]">
+	<div class=" grid min-h-dvh grid-cols-[1rem_1fr_1rem] grid-rows-[1rem_1fr_1rem]">
 		<!-- Top row -->
 		<div class="border-r border-b border-gray-100"></div>
 		<div class="border-b border-gray-100"></div>

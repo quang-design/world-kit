@@ -54,8 +54,6 @@ export const actions: Actions = {
 			});
 		}
 
-		if (data.url) {
-			redirect(303, data.url);
-		}
+		throw redirect(303, data.url);
 	}
 };

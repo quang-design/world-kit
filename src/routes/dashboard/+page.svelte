@@ -3,37 +3,34 @@
 	import type { EventHandler } from 'svelte/elements';
 
 	import type { PageData } from './$types';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import Globe from './globe.svg.svelte';
 
 	let { data } = $props();
 	let { notes, supabase, user } = $derived(data);
-
-	const handleSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (evt) => {
-		evt.preventDefault();
-		if (!evt.target) return;
-
-		const form = evt.target as HTMLFormElement;
-
-		const note = (new FormData(form).get('note') ?? '') as string;
-		if (!note) return;
-
-		const { error } = await supabase.from('notes').insert({ note });
-		if (error) console.error(error);
-
-		invalidate('supabase:db:notes');
-		form.reset();
-	};
 </script>
 
-<h1>Private page for user: {user?.email}</h1>
-<h2>Notes</h2>
-<ul>
-	{#each notes as note}
-		<li>{note.note}</li>
-	{/each}
-</ul>
-<form onsubmit={handleSubmit}>
-	<label>
-		Add a note
-		<input name="note" type="text" />
-	</label>
-</form>
+<svelte:head>
+	<title>Dashboard - World Kit</title>
+</svelte:head>
+
+<section class="my-4 w-full">
+	<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+		<div
+			class="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-full border border-gray-100 bg-white"
+		>
+			<div class="h-full w-full">
+				<Globe />
+			</div>
+			<Button variant="outline" size="sm" class="absolute z-10">World_001</Button>
+		</div>
+		<div
+			class="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-full border border-gray-100 bg-white"
+		>
+			<div class="h-full w-full">
+				<Globe />
+			</div>
+			<Button variant="outline" size="sm" class="absolute z-10">World_002</Button>
+		</div>
+	</div>
+</section>
