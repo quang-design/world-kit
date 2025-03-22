@@ -8,9 +8,6 @@ onlyBuiltDependencies:
   - esbuild
 
 dependencies:
-  '@lucide/svelte':
-    specifier: ^0.482.0
-    version: 0.482.0(svelte@5.22.6)
   '@supabase/ssr':
     specifier: ^0.5.2
     version: 0.5.2(@supabase/supabase-js@2.49.1)
@@ -28,6 +25,9 @@ devDependencies:
   '@eslint/js':
     specifier: ^9.18.0
     version: 9.22.0
+  '@lucide/svelte':
+    specifier: ^0.482.0
+    version: 0.482.0(svelte@5.22.6)
   '@sveltejs/adapter-auto':
     specifier: ^4.0.0
     version: 4.0.0(@sveltejs/kit@2.19.0)
@@ -504,7 +504,7 @@ packages:
       svelte: ^5
     dependencies:
       svelte: 5.22.6
-    dev: false
+    dev: true
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
