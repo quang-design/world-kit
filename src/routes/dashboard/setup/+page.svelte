@@ -11,6 +11,7 @@
 	import SectionName from './components/section-name.svelte';
 	import SectionOutline from './components/section-outline.svelte';
 	import SectionLogo from './components/section-logo.svelte';
+	import SectionColors from './components/section-colors.svelte';
 
 	// Project name
 	let projectName = $state('WorldKit');
@@ -24,8 +25,8 @@
 
 	// Colors
 	let colors = $state([
-		{ name: 'White', hex: '#FFFFFF', isPrimary: true },
-		{ name: 'Black', hex: '#000000', isPrimary: true }
+		{ name: 'White', hex: '#FFFFFF' },
+		{ name: 'Black', hex: '#000000' }
 	]);
 
 	// Fonts
@@ -97,11 +98,6 @@
 			};
 			reader.readAsDataURL(file);
 		}
-	}
-
-	// Add a new color
-	function addColor() {
-		colors = [...colors, { name: 'New Color', hex: '#3B82F6', isPrimary: false }];
 	}
 
 	// Handle font upload
@@ -181,58 +177,7 @@
 	<SectionName {projectName} />
 	<SectionOutline bind:selectedOutline />
 	<SectionLogo bind:logoFile bind:logoPreview />
-
-	<!-- Add colors -->
-	<Section
-		title="Add colors"
-		description="Add your brand colors. These can automatically populate sections of your outline. You can replace or add more later."
-	>
-		{#snippet content()}
-			<div class="mt-4 space-y-4">
-				<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-					{#each colors as color, i}
-						<div class="flex flex-col items-center">
-							<div
-								class="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full"
-								style="background-color: {color.hex}; border: 1px solid #e2e8f0;"
-							>
-								{#if color.isPrimary}
-									<div
-										class="flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md"
-									>
-										<Check class="h-4 w-4 text-black" />
-									</div>
-								{/if}
-							</div>
-							<Input
-								type="text"
-								value={color.name}
-								class="mt-2 w-full text-center"
-								on:input={(e) => {
-									const newColors = [...colors];
-									newColors[i].name = e.target.value;
-									colors = newColors;
-								}}
-							/>
-						</div>
-					{/each}
-
-					<div class="flex flex-col items-center justify-center">
-						<div
-							class="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-2 border-dashed border-gray-300 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
-							onclick={addColor}
-							role="button"
-							tabindex="0"
-							onkeydown={(e) => e.key === 'Enter' && addColor()}
-						>
-							<Plus class="h-8 w-8 text-gray-400" />
-						</div>
-						<p class="mt-2 text-sm text-gray-500">Add Color</p>
-					</div>
-				</div>
-			</div>
-		{/snippet}
-	</Section>
+	<SectionColors bind:colors />
 
 	<!-- Upload fonts -->
 	<Section
@@ -265,9 +210,6 @@
 						id="font-upload"
 					/>
 				</div>
-				<label for="font-upload" class="inline-block">
-					<Button variant="outline" class="mt-2">Upload Fonts</Button>
-				</label>
 
 				{#if fonts.length > 0}
 					<div class="mt-4">
