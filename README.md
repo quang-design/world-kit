@@ -34,7 +34,7 @@ pnpm install
 
 Create a `.env` file in the root directory with your Supabase credentials:
 
-```
+```bash
 PUBLIC_SUPABASE_URL=your-supabase-url
 PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
