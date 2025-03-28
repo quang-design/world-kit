@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Section from './components/_section.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { Card, CardContent } from '$lib/components/ui/card';
 	import { RadioGroup, RadioGroupItem } from '$lib/components/ui/radio-group';
@@ -12,6 +11,8 @@
 	import SectionOutline from './components/section-outline.svelte';
 	import SectionLogo from './components/section-logo.svelte';
 	import SectionColors from './components/section-colors.svelte';
+	import SectionFonts from './components/section-fonts.svelte';
+	import SectionTypography from './components/section-typography.svelte';
 
 	// Project name
 	let projectName = $state('WorldKit');
@@ -30,7 +31,7 @@
 	]);
 
 	// Fonts
-	let fonts = $state<{ name: string; file: File }[]>([]);
+	let fonts = $state<{ name: string; file: File | null; source?: string; url?: string }[]>([]);
 
 	// Typography styles
 	let typographyStyles = $state([
@@ -100,18 +101,6 @@
 		}
 	}
 
-	// Handle font upload
-	function handleFontUpload(event: Event) {
-		const target = event.target as HTMLInputElement;
-		const files = target?.files;
-		if (files && files.length > 0) {
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				fonts = [...fonts, { name: file.name.split('.')[0], file }];
-			}
-		}
-	}
-
 	// Save setup data
 	let isSaving = $state(false);
 	let saveError = $state<string | null>(null);
@@ -178,98 +167,8 @@
 	<SectionOutline bind:selectedOutline />
 	<SectionLogo bind:logoFile bind:logoPreview />
 	<SectionColors bind:colors />
-
-	<!-- Upload fonts -->
-	<Section
-		title="Upload fonts"
-		description="Upload your brand's fonts, .WOFF or .WOFF2 file types preferred, one font weight per file. These can automatically populate sections of your outline. You can replace or add more later."
-	>
-		{#snippet content()}
-			<div class="mt-4 space-y-4">
-				<p class="text-sm text-gray-500 dark:text-gray-400">
-					<a href="/help/fonts" class="text-blue-500 hover:underline"
-						>Read more about uploading fonts here</a
-					>.
-				</p>
-
-				<div
-					class="flex h-48 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
-				>
-					<div class="flex flex-col items-center justify-center text-center">
-						<Upload class="h-12 w-12 text-gray-400" />
-						<p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-							Click or drag to upload fonts
-						</p>
-					</div>
-					<input
-						type="file"
-						class="hidden"
-						accept=".woff,.woff2,.ttf,.otf"
-						multiple
-						onchange={handleFontUpload}
-						id="font-upload"
-					/>
-				</div>
-
-				{#if fonts.length > 0}
-					<div class="mt-4">
-						<h4 class="mb-2 text-sm font-medium">Uploaded Fonts</h4>
-						<div class="space-y-2">
-							{#each fonts as font}
-								<div
-									class="flex items-center justify-between rounded-md bg-gray-50 p-3 dark:bg-gray-800"
-								>
-									<span>{font.name}</span>
-									<Button variant="ghost" size="sm" class="text-red-500 hover:text-red-700">
-										<Trash class="h-5 w-5" />
-									</Button>
-								</div>
-							{/each}
-						</div>
-					</div>
-				{/if}
-			</div>
-		{/snippet}
-	</Section>
-
-	<!-- Define type styles -->
-	<Section
-		title="Define type styles"
-		description="Customize the typography for your project by defining styles that will be used throughout the document."
-	>
-		{#snippet content()}
-			<div class="mt-4 space-y-8">
-				{#each typographyStyles as style, i}
-					<div class="border-b border-gray-200 pb-6 dark:border-gray-700">
-						<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-							<div class="md:w-1/4">
-								<h4 class="text-sm font-medium">{style.name}</h4>
-								<div class="mt-2 flex flex-wrap gap-2">
-									<div class="rounded bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">
-										{style.size}
-									</div>
-									<div class="rounded bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">
-										{style.weight === 700 ? 'Bold' : 'Regular'}
-									</div>
-									<div class="rounded bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">
-										Line height: {style.lineHeight}
-									</div>
-								</div>
-							</div>
-							<div class="md:w-3/4">
-								<p
-									class="break-words"
-									style="font-size: {style.size}; font-weight: {style.weight}; line-height: {style.lineHeight};"
-								>
-									{style.sample}
-								</p>
-							</div>
-						</div>
-					</div>
-				{/each}
-			</div>
-		{/snippet}
-	</Section>
+	<SectionFonts bind:fonts />
+	<SectionTypography bind:typographyStyles />
 
 	<!-- Save button -->
 	<div class="mt-8 flex flex-col items-end space-y-4">
