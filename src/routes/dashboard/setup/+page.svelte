@@ -7,12 +7,12 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Upload, Check, Plus, Loader } from '@lucide/svelte';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
-	import SectionName from './components/section-name.svelte';
-	import SectionOutline from './components/section-outline.svelte';
-	import SectionLogo from './components/section-logo.svelte';
-	import SectionColors from './components/section-colors.svelte';
-	import SectionFonts from './components/section-fonts.svelte';
-	import SectionTypography from './components/section-typography.svelte';
+	import SectionName from '$lib/components/section-name.svelte';
+	import SectionOutline from '$lib/components/section-outline.svelte';
+	import SectionLogo from '$lib/components/section-logo.svelte';
+	import SectionColors from '$lib/components/section-colors.svelte';
+	import SectionFonts from '$lib/components/section-fonts.svelte';
+	import SectionTypography from '$lib/components/section-typography.svelte';
 
 	// Project name
 	let projectName = $state('WorldKit');
